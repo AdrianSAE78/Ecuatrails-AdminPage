@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import api from './axios';
 
 export type Status = true | false;
@@ -39,8 +40,17 @@ export async function createInterestPoint(payload: Partial<InterestPoint> & { na
   return data;
 }
 
-export async function updateInterestPoint(id: number | string, payload: Partial<InterestPoint>): Promise<InterestPoint> {
-  const { data } = await api.put(`/api/admin/interest-points/${id}`, payload);
+export async function updateInterestPoint(
+  id: number | string,
+  payload: Partial<InterestPoint>
+): Promise<InterestPoint> {
+  const cleanPayload = Object.fromEntries(
+    Object.entries(payload).filter(([_, value]) => value !== undefined && value !== null && value !== '')
+  );
+
+  console.log('Updating POI with payload:', cleanPayload);
+
+  const { data } = await api.put(`/api/admin/interest-points/${id}`, cleanPayload);
   return data;
 }
 

@@ -30,14 +30,14 @@ export interface RouteCreate {
 export type RouteUpdate = Partial<RouteCreate>;
 
 export interface RoutePoiLink {
-  id: number;         // id del vínculo (routeInterestPointId)
+  id: number;
   interestPointId: number;
   interestPointName: string;
-  position: number;   // orden en la ruta
+  position: number;
 }
 
 export interface RouteLodgingLink {
-  id: number;         // id del vínculo routeLodgingId (si existe)
+  id: number;
   lodgingId: number;
   lodgingName: string;
 }

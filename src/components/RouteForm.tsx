@@ -10,6 +10,7 @@ const schema = z.object({
   difficulty: z.string().optional(),
   status: z.boolean().default(true),
   categoryId: z.coerce.number().optional(),
+  estimatedDuration: z.string().optional(),
 });
 export type RouteFormValues = z.infer<typeof schema>;
 
@@ -49,6 +50,11 @@ export default function RouteForm({
         <Stack spacing={2} mt={1}>
           <TextField label="Nombre" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} required />
           <TextField label="Descripción" value={values.description ?? ''} onChange={(e) => setValues({ ...values, description: e.target.value })} multiline minRows={2} />
+          <TextField
+            label="Duración Estimada (ISO-8601)"
+            value={values.estimatedDuration ?? ''}
+            onChange={(e) => setValues({ ...values, estimatedDuration: e.target.value })}
+          />
           <TextField label="Distancia (km)" type="number" value={values.distanceKm ?? ''} onChange={(e) => setValues({ ...values, distanceKm: e.target.value === '' ? undefined : Number(e.target.value) })} />
           <TextField select label="Dificultad" value={values.difficulty ?? 'MEDIUM'} onChange={(e) => setValues({ ...values, difficulty: e.target.value })}>
             <MenuItem value="EASY">Fácil</MenuItem>
